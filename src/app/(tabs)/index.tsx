@@ -52,8 +52,8 @@ export default function HomeScreen() {
                   <Text className="font-bold text-2xl">
                     {item.firstName} {item.lastName}
                   </Text>
-                  <Text className="font-medium text-2xl">{item.age}</Text>
-                  <Text className="font-medium text-2xl">{item.height}</Text>
+                  <Text className="font-medium text-lg">{item.age}</Text>
+                  <Text className="font-medium text-lg">{item.height}</Text>
                 </View>
               </View>
             </View>
