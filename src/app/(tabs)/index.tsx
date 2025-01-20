@@ -1,8 +1,12 @@
 import { useGetAllUserQuery } from "@/src/api/usersApi";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, RefreshControl } from "react-native";
 
 export default function HomeScreen() {
-  const { data: usersData } = useGetAllUserQuery(
+  const {
+    data: usersData,
+    isFetching,
+    refetch,
+  } = useGetAllUserQuery(
     {
       params: {
         page: 1,
@@ -13,6 +17,7 @@ export default function HomeScreen() {
       refetchOnMountOrArgChange: true,
       selectFromResult: ({ data, ...rest }) => ({
         data: (data as any)?.users?.filter((user: any) => user.height < 170),
+        ...rest,
       }),
     },
   );
@@ -21,7 +26,10 @@ export default function HomeScreen() {
     <View className="flex-1 m-4">
       <FlatList
         numColumns={2}
-        data={usersData.slice(0, 10)}
+        refreshControl={
+          <RefreshControl onRefresh={refetch} refreshing={isFetching} />
+        }
+        data={usersData?.slice?.(0, 10).sort((a: any, b: any) => b.age - a.age)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={{ flex: 1 }}>
