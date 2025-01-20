@@ -29,7 +29,9 @@ export default function HomeScreen() {
         refreshControl={
           <RefreshControl onRefresh={refetch} refreshing={isFetching} />
         }
-        data={usersData?.slice?.(0, 10).sort((a: any, b: any) => b.age - a.age)}
+        data={usersData
+          ?.slice?.(0, 10)
+          ?.sort?.((a: any, b: any) => b.age - a.age)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={{ flex: 1 }}>
