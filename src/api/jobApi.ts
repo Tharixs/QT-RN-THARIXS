@@ -1,14 +1,16 @@
 import { myAppApi } from ".";
+import { paginationConfig } from "./config/pagination.config";
 
 const jobApi = myAppApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (build) => ({
-    getAllJob: build.query<any, { params: QueryParams }>({
+    getAllJob: build.query<PaginationResponse<any>, { params?: QueryParams }>({
       query: ({ params }) => ({
         url: "/pekerjaan",
         params,
       }),
-      transformResponse: (response: any) => response,
+      transformResponse: (response: PaginationResponse<any>) => response,
+      ...paginationConfig(),
     }),
   }),
 });
