@@ -10,7 +10,7 @@ export const baseQuery: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  const baseUrl = "http://192.168.179.79:3000/api";
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL as string;
   const query = buildBaseQuery(baseUrl);
   const result = await query(args, api, extraOptions);
   return result;
