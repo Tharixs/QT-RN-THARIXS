@@ -1,5 +1,4 @@
 interface DefaultResponseType<T = any> {
-  // sooon
   success: boolean;
   message: string;
   data: T;
