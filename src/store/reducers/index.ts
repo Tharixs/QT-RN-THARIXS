@@ -1,10 +1,14 @@
 import { myAppApi } from "@/src/api";
 import { combineReducers, UnknownAction } from "redux";
+import { cartReducer, cartSlice } from "./cartReducer";
+import { transactionSlice } from "./transactionReducer";
 
 // ini akan berisi semua reducer slice yang dibuat
 // kamu bisa membuat reducer slice di folder reducers
 const reducers = {
   [myAppApi.reducerPath]: myAppApi.reducer,
+  [cartSlice.name]: cartReducer,
+  [transactionSlice.name]: transactionSlice.reducer,
 };
 const combinedReducers = combineReducers(reducers);
 

@@ -8,7 +8,10 @@ import "react-native-reanimated";
 import "@/global.css";
 import { ThemeProvider } from "../components/ThemeProviders";
 import { Provider } from "react-redux";
-import { store } from "../store";
+import { persistor, store } from "../store";
+import { PersistGate } from "redux-persist/integration/react";
+import { ActivityIndicator, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
 if (__DEV__) {
   require("../../ReactotronConfig");
@@ -36,9 +39,18 @@ export default function RootLayout() {
       <ThemeProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="detailTransaction"
+            options={{
+              headerShown: true,
+              title: "Detail Transaction",
+              headerTintColor: "#fff",
+              headerStyle: { backgroundColor: "#1d4ed8" },
+            }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
-        <StatusBar style="auto" />
+        <StatusBar style="light" backgroundColor="#1e40af" />
       </ThemeProvider>
     </Provider>
   );
