@@ -10,8 +10,7 @@ import { ThemeProvider } from "../components/ThemeProviders";
 import { Provider } from "react-redux";
 import { persistor, store } from "../store";
 import { PersistGate } from "redux-persist/integration/react";
-import { ActivityIndicator, Text } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 if (__DEV__) {
   require("../../ReactotronConfig");
@@ -35,23 +34,27 @@ export default function RootLayout() {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="detailTransaction"
-            options={{
-              headerShown: true,
-              title: "Detail Transaction",
-              headerTintColor: "#fff",
-              headerStyle: { backgroundColor: "#1d4ed8" },
-            }}
-          />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="light" backgroundColor="#1e40af" />
-      </ThemeProvider>
-    </Provider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <ThemeProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="detailTransaction"
+                options={{
+                  headerShown: true,
+                  title: "Detail Transaction",
+                  headerTintColor: "#fff",
+                  headerStyle: { backgroundColor: "#1d4ed8" },
+                }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="light" backgroundColor="#1e40af" />
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
