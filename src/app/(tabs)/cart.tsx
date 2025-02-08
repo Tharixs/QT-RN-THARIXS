@@ -113,12 +113,19 @@ export default function TabTwoScreen() {
                 defaultValue={""}
                 name="cardNumber"
                 control={form.control}
-                rules={{ required: true }}
+                rules={{ required: true, maxLength: 19 }}
                 render={({ field: { onChange, value, onBlur } }) => (
                   <TextInput
                     value={value}
+                    maxLength={19}
+                    onChangeText={(e) => {
+                      const formatedNumberOfCard =
+                        e.length === 4 || e.length === 9 || e.length === 14
+                          ? `${e}-`
+                          : e;
+                      onChange(String(formatedNumberOfCard));
+                    }}
                     onBlur={onBlur}
-                    onChangeText={(e) => onChange(String(e))}
                     placeholder="Enter Card Number"
                     keyboardAppearance="dark"
                     keyboardType="numeric"

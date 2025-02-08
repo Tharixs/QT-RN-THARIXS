@@ -26,8 +26,8 @@ export default function HomeScreen() {
     (state: any) => state?.cartSlice?.products || [],
   );
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(30);
+  const [search, setSearch] = useState("");
   const debounceSearch = useDebounce(search, 500);
   const {
     data: productsData,
@@ -109,7 +109,10 @@ export default function HomeScreen() {
           flex: filteredProducts?.length ? 0 : 1,
         }}
         renderItem={({ item }) => (
-          <View className="flex-1 border border-blue-500 rounded-lg mt-2 gap-4 bg-white  shadow-md shadow-slate-700 justify-between">
+          <View
+            key={item.id.toString()}
+            className="flex-1 border border-blue-500 rounded-lg mt-2 gap-4 bg-white  shadow-md shadow-slate-700 justify-between"
+          >
             <View className="border border-slate-200 mx-4 mt-4">
               <Image
                 resizeMode="contain"
